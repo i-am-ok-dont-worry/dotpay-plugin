@@ -39,7 +39,7 @@ module.exports = ({ config, db, router, cache, apiStatus, apiError, getRestApiCl
     }
   });
 
-  router.get('/status', async (req, res) => {
+  router.get('/status/:orderId', async (req, res) => {
     const { orderId } = req.params;
     try {
       if (!orderId) { throw new Error(`Order id is required`); }
