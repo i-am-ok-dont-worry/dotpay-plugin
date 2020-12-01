@@ -27,10 +27,10 @@ module.exports = ({ config, db, router, cache, apiStatus, apiError, getRestApiCl
     return client;
   };
 
-  router.get('/get-form/:orderId', async (req, res) => {
+  router.get('/form/:orderId', async (req, res) => {
     const { orderId } = req.params;
-    if (!orderId) { throw new Error('Order id is required'); }
     try {
+      if (!orderId) { throw new Error('Order id is required'); }
       const client = createMage2RestClient();
       const response = await client.dotpay.form(orderId);
       apiStatus(res, response, 200);
@@ -41,8 +41,8 @@ module.exports = ({ config, db, router, cache, apiStatus, apiError, getRestApiCl
 
   router.get('/status', async (req, res) => {
     const { orderId } = req.params;
-    if (!orderId) { throw new Error(`Order id is required`); }
     try {
+      if (!orderId) { throw new Error(`Order id is required`); }
       const client = createMage2RestClient();
       const response = await client.dotpay.status(orderId);
       apiStatus(res, response, 200);
@@ -54,7 +54,7 @@ module.exports = ({ config, db, router, cache, apiStatus, apiError, getRestApiCl
   return {
     domainName: '@grupakmk',
     pluginName: 'dotpay-payment',
-    route: 'dotpay',
+    route: '/dotpay',
     router
   };
 };
